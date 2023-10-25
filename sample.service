@@ -1,0 +1,14 @@
+[Unit]
+Description=Sample
+After=network.target
+
+[Service]
+User=illia
+WorkingDirectory=/opt/sample
+Environment="PORT=8888"
+ExecStart=/usr/bin/java  -jar service.jar
+RestartSec=10
+
+
+[Install]
+WantedBy=multi-user.target
