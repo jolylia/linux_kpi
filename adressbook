@@ -1,0 +1,31 @@
+#!/bin/bash
+
+address_book="address_book.txt"
+
+case "$1" in
+    "new")
+        echo "$2 $3" >> "$address_book"
+        ;;
+    "list")
+        if [ -s "$address_book" ]; then
+            cat "$address_book"
+        else
+            echo "адресна книга порожня"
+        fi
+        ;;
+    "remove")
+        sed -i "/^$2/d" "$address_book"
+        ;;
+    "clear")
+        > "$address_book"
+        ;;
+    "lookup")
+        grep "$2" "$address_book" | awk '{print $2}'
+        ;;
+    *)
+        echo "Usage: $0 {new|list|remove|clear|lookup} [arguments]"
+        exit 1
+        ;;
+esac
+
+
